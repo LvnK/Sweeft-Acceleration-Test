@@ -1,0 +1,10 @@
+3. მოცემულია String რომელიც შედგება „(" და „)" ელემენტებისგან. დაწერეთ ფუნქცია რომელიც აბრუნებს ფრჩხილები არის თუ არა მათემატიკურად სწორად დასმული.
+
+	func isProperly(sequence: String) -> Bool {
+		// Your code goes here
+	}
+
+	Examples:
+	isProperly(sequence: "(()())") ➞ true
+	isProperly(sequence: ")(()") ➞ false
+	isProperly(sequence: "(()())(") ➞ false
