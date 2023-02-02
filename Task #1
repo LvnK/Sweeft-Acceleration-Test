@@ -1,26 +1,28 @@
 1. გვაქვს 1,5,10,20 და 50 თეთრიანი მონეტები. დაწერეთ ფუნქცია, რომელსაც გადაეცემა თანხა (თეთრებში) და აბრუნებს მონეტების მინიმალურ რაოდენობას, რომლითაც შეგვიძლია ეს თანხა დავახურდაოთ.
 
 
-	func minSplit(amount: Int) -> Int {
-		// Your code goes here
-	}
+function coinExchanger(amount) {
+  // Available coin denominations
+  let coins = [50, 20, 10, 5, 1];
+  // Result array to store the coins used
+  let result = [];
 
-	Examples:
-	minSplit(9) ➞ 5  //(1, 1, 1, 1, 5)
-	minSplit(26) ➞ 3  //(1, 5, 20)
-	minSplit(172) ➞ 6  //(1, 1, 20, 50, 50, 50)
-	
-function start(){
+  // Loop through the coins array
+  for (let i = 0; i < coins.length; i++) {
+    // Check if the current coin denomination is less than or equal to the remaining amount
+    while (amount >= coins[i]) {
+      // Subtract the coin denomination from the remaining amount
+      amount -= coins[i];
+      // Add the coin denomination to the result array
+      result.push(coins[i]);
+    }
+  }
 
-	 if(i=50){
-	    return (20,20,10);
-	  } if else(i=20){
-	    return (10,10);
-	  }if else(i=10){
-	    return (5,5);
-	  }if else (i=5){
-	    return (1,1,1,1,1);
-	  }else {
-	    break;
-	  }
+  // Log the result array to the console
+  console.log(result);
+  // Return the result array
+  return result;
 }
+
+// Call the function with an example amount
+console.log(coinExchanger(121)); // [50, 50, 20, 1]
