@@ -1,12 +1,30 @@
 2. დაწერეთ ფუნქცია რომელიც დააჯამებს ციფრებს ორ რიცსხვს შორის.
    მაგალითად გადმოგვეცემა 19 და 22. მათ შორის ციფრების ჯამი იქნება :
-   // 19, 20, 21, 22
-   // (1 + 9) + (2 + 0) + (2 + 1) + (2 + 2) = 19
+   
+   
+   
+   
+   // function to calculate the sum of digits of all numbers between two numbers
+function sumOfDigits(start, end) {
+  // initialize a variable to store the sum
+  let sum = 0;
+  
+  // loop through all numbers from start to end
+  for (let i = start; i <= end; i++) {
+    // convert each number to a string and split it into individual digits
+    let digits = i.toString().split("");
+    
+    // loop through all digits and add them to the sum
+    for (let j = 0; j < digits.length; j++) {
+      sum += parseInt(digits[j]);
+    }
+  }
+  
+  // return the sum of digits
+  return sum;
+}
 
-   func sumOfDigits(start: Int, end: Int) -> Int {
-       // Your code goes here
-   }
-
-   sumOfDigits(7, 8) ➞ 15
-   sumOfDigits(17, 20) ➞ 29
-   sumOfDigits(10, 12) ➞ 6
+// test the function with start and end values of 17 and 20
+let start = 17;
+let end = 20;
+console.log(sumOfDigits(start, end));
