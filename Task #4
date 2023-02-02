@@ -2,11 +2,42 @@
    ჩვენი ამოცანაა დავითვალოთ რამდენი განსხვავებული კომბინაციით შეუძლია ზურიკოს ხიდის გადალახვა. გადმოგვეცემა ხიდის სიგრძე და ინფორმაცია ჩატეხილ ფიცრებზე. 0 აღნიშნავს ჩატეხილ ფიცარს 1_ანი კი მთელს. დასაწყისისთვის ზურიკო დგას ხიდის ერთ მხარეს (არა პირველ ფიცარზე) და გადალახვად ჩათვლება ხიდის მეორე მხარე (ბოლო ფიცრის შემდეგი ნაბიჯი)
 
 
-   func countWays(n: Int, steps: [Int]) -> Int {
-   		// Your code goes here
-   }
+   function countWays(n, steps) {
+    // Check if first or last plank is broken
+    if (steps[0] === 0 || steps[n-1] === 0) {
+        return 0;
+    }
 
-   Examples:
-   countWays(n: 3, steps: [0, 1, 0]) ➞ 1
-   countWays(n: 4, steps: [0, 1, 1, 0]) ➞ 0
-   countWays(n: 5, steps: [1, 1, 0, 1, 1]) ➞ 4 // (s, 1, 2, 4, 5, f), (s, 1, 2, 4, f), (s, 2, 4, 5, f), (s, 2, 4, f)  s - ხიდის ერთი მხარე, f - ხიდის მეორე მხარე
+    // Create an array to store the number of ways to reach each plank
+    let ways = Array(n).fill(0);
+
+    // Initially, there is only one way to reach the first plank
+    ways[0] = 1;
+
+    // Iterate through the planks to find the number of ways to reach each one
+    for (let i = 1; i < n; i++) {
+        // Check if the current plank is broken
+        if (steps[i] === 0) {
+            continue;
+        }
+
+        // If the previous plank is not broken, add the number of ways to reach it to the current plank
+        if (steps[i-1] === 1) {
+            ways[i] += ways[i-1];
+        }
+
+        // If the previous plank is not the first plank and is not broken, add the number of ways to reach it to the current plank
+        if (i > 1 && steps[i-2] === 1) {
+            ways[i] += ways[i-2];
+        }
+    }
+
+    // Return the number of ways to reach the last plank
+    return ways[n-1];
+}
+
+// Test cases
+console.log(countWays(3, [0, 1, 0]) === 1);
+console.log(countWays(4, [0, 1, 1, 0]) === 0);
+console.log(countWays(5, [1, 1, 0, 1, 1]) === 4);
+
