@@ -1,10 +1,35 @@
 3. მოცემულია String რომელიც შედგება „(" და „)" ელემენტებისგან. დაწერეთ ფუნქცია რომელიც აბრუნებს ფრჩხილები არის თუ არა მათემატიკურად სწორად დასმული.
 
-	func isProperly(sequence: String) -> Bool {
-		// Your code goes here
-	}
+	function isProperlyNested(sequence) {
+  // Use a stack to keep track of open parentheses
+  let stack = [];
 
-	Examples:
-	isProperly(sequence: "(()())") ➞ true
-	isProperly(sequence: ")(()") ➞ false
-	isProperly(sequence: "(()())(") ➞ false
+  // Loop through each character in the sequence
+  for (let i = 0; i < sequence.length; i++) {
+    let char = sequence[i];
+
+    // If the character is an open parenthesis, push it onto the stack
+    if (char === "(") {
+      stack.push(char);
+    } 
+    // If the character is a closing parenthesis
+    else if (char === ")") {
+      // If the stack is empty, return false
+      if (stack.length === 0) {
+        return false;
+      } 
+      // If the stack is not empty, pop the last open parenthesis from the stack
+      else {
+        stack.pop();
+      }
+    }
+  }
+
+  // If the stack is empty, all parentheses were properly nested
+  return stack.length === 0;
+}
+
+// Examples:
+console.log(isProperlyNested("(()())")); // true
+console.log(isProperlyNested(")(()")); // false
+console.log(isProperlyNested("(()())(")); // false
